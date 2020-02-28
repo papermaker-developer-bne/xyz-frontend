@@ -16,7 +16,7 @@ export const Card = ({ product }) => {
               View Product
             </button>
           </Link>
-          <Link to="/">
+          <Link to={`/editProduct/${product.id}`}>
             <button className="btn btn-outline-danger mt-2 mb-2">
               Edit Product
             </button>

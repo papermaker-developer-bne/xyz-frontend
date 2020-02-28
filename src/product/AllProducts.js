@@ -68,6 +68,7 @@ export const AllProducts = () => {
         rates={allRates}
         handleChange={handleChange}
       />
+
       <div>
         {products?.map((product, i) => (
           <div key={i} className="col-10 mb-3">
