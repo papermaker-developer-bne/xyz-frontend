@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Card } from "../module/Card";
 import data from "../data/products.json";
 import allRates from "../data/exchange_rates.json";
 
@@ -75,6 +76,13 @@ export const AllProducts = () => {
           </form>
         </div>
       </nav>
+      <div>
+        {data.map((product, i) => (
+          <div key={i} className="col-10 mb-3">
+            <Card product={product} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
