@@ -11,7 +11,7 @@ export const Card = ({ product }) => {
           <p>
             <span>{product.price.base}</span> {product.price.amount}
           </p>
-          <Link to="/">
+          <Link to={`/product/${product.id}`}>
             <button className="btn btn-outline-primary mt-2 mb-2 mr-2">
               View Product
             </button>
