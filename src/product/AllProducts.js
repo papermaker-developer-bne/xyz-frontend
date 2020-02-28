@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import _ from "lodash";
+import { Nav } from "../module/Nav";
 import { Card } from "../module/Card";
 import data from "../data/products.json";
 import allRates from "../data/exchange_rates.json";
@@ -9,79 +11,65 @@ export const AllProducts = () => {
     JSON.parse(localStorage.getItem("products")) || data
   );
 
+  const getRate = (rates, cerrentBase) => {
+    switch (cerrentBase) {
+      case "AUD":
+        return rates.rates.AUD;
+      case "USD":
+        return rates.rates.USD;
+      case "CNY":
+        return rates.rates.CNY;
+      default:
+        return 1;
+    }
+  };
+
+  const CurrencyConverter = (currentRates, product) => {
+    if (product.price.base === currentBase) {
+      return product;
+    } else {
+      product.price.amount = (
+        product.price.amount / getRate(currentRates, product.price.base)
+      ).toFixed(2);
+      product.price.base = currentBase;
+      return product;
+    }
+  };
+
+  const getProductsInCurrentBase = () => {
+    const currentRates = _.find(allRates, ["base", currentBase]);
+    const cloneProducts = JSON.parse(localStorage.getItem("products")) || data;
+    const newProduts = cloneProducts?.map(product =>
+      CurrencyConverter(currentRates, product)
+    );
+    setProducts(newProduts);
+  };
+
+  useEffect(() => {
+    // change products prices
+    // bugs: frontend shows the prices from last currency base
+    getProductsInCurrentBase();
+  }, [currentBase]);
+
   const handleChange = event => {
     setBase(event.target.value);
   };
 
+  useEffect(() => {
+    if (!JSON.parse(localStorage.getItem("products"))) {
+      localStorage.setItem("products", JSON.stringify(data));
+    }
+  }, []);
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="/">
-          XYZ
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Current base: {currentBase}
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                {allRates?.map((item, i) => (
-                  <a key={i} className="dropdown-item" href="#">
-                    <input
-                      onChange={handleChange}
-                      value={`${item.base}`}
-                      id={item.base}
-                      name="base"
-                      type="radio"
-                      className="mr-2 ml-4"
-                    />
-                    <label className="form-check-label" htmlFor={item.base}>
-                      {item.base}
-                    </label>
-                  </a>
-                ))}
-              </div>
-            </li>
-          </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-            >
-              Search
-            </button>
-          </form>
-        </div>
-      </nav>
+      <Nav
+        currentBase={currentBase}
+        rates={allRates}
+        handleChange={handleChange}
+      />
       <div>
-        {products.map((product, i) => (
+        {products?.map((product, i) => (
           <div key={i} className="col-10 mb-3">
             <Card product={product} />
           </div>
