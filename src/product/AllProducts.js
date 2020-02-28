@@ -5,6 +5,10 @@ import allRates from "../data/exchange_rates.json";
 
 export const AllProducts = () => {
   const [currentBase, setBase] = useState("AUD");
+  const [products, setProducts] = useState(
+    JSON.parse(localStorage.getItem("products")) || data
+  );
+
   const handleChange = event => {
     setBase(event.target.value);
   };
@@ -77,7 +81,7 @@ export const AllProducts = () => {
         </div>
       </nav>
       <div>
-        {data.map((product, i) => (
+        {products.map((product, i) => (
           <div key={i} className="col-10 mb-3">
             <Card product={product} />
           </div>
