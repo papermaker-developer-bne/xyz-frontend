@@ -1,15 +1,83 @@
-## How to run the project
 
-1. Open the Project_Coffee.sln inside Project_Coffee folder
-2. Start the project through IIS Express
-3. When the browser opens, You can copy the address from below options to check the results:
-	- `localhost:54716/api/Drink/List`
-        - Get drink data from local drink.json file
-	- `localhost:54716/api/Order/List`
-        - Get orders data from local orders.json file
-    - `localhost:54716/api/Order/All`  
-        - Get order detials with total cost and drink details from all users
-	- `localhost:54716/api/Order/Info?name=`
-        - Return order details for certain user based on user name
-    - `localhost:54716/api/results/all`
-        - Get results including total payments, orders and balance from all users
+## How to run this project
+
+1. Download this project from github, unzip the project. Or you can open your command line, copy `git clone https://github.com/papermaker-developer-bne/xyz-frontend.git` to download the project in your preferred directory.
+
+2. In your command line, navigate to the project folder, use `npm i` to download all packages required in this project.
+
+3. After that, use `npm start` in your command line to start the project.
+
+4. Check out the project rendering on `localhost:3000` from a browser.
+
+5. If the `port:3000` is aleady taken, use `sudo lsof -t -i tcp:3000 | xargs kill -9` in the terminal to kill all processes using `port:3000`. Then start from step 3.
+
+-----
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
